@@ -1,6 +1,7 @@
 package principal;
 
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -21,10 +22,10 @@ public class VistaDePaneles extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	protected JTextField textField;
-	protected JTextArea textArea;
-	protected JPanel querySequence;
+	protected JTextArea queryResult,tResult;
+	protected JPanel querySequence, queryPercentage;
 	protected JButton queryButton;
-	protected JComboBox<String> comboOfOptions, typeFile;
+	protected JComboBox<String> comboOfOptions, typeFile, numberIndex;
 	protected JRadioButton proteinButton;
 	protected JRadioButton nucleotidButton;
 	protected ArrayList<String> searchList;
@@ -34,13 +35,14 @@ public class VistaDePaneles extends JPanel {
 
 		// Panel queryType
 
-		// Create the radio button
+			// Create the radio button
+		
 		String proteinString = new String("Protein");
 		String nucleotidString = new String("Nucleotide sequence");
 		proteinButton = new JRadioButton(proteinString, true);
 		nucleotidButton = new JRadioButton(nucleotidString, false);
 
-		// Group the radio buttons
+			// Group the radio buttons
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(proteinButton);
@@ -51,59 +53,56 @@ public class VistaDePaneles extends JPanel {
 		add(queryType);
 
 		// Panel querySequence
-
+		
+		querySequence = new JPanel();
+		querySequence.setLayout(new GridLayout(5, 2));
+		JLabel lType = new JLabel("Choose the database: ");
+		JLabel lIndex = new JLabel("Index : ");
 		JLabel labelQuerySelection = new JLabel("Enter the sequence to compare: ");
 		typeFile = new JComboBox<String>();
 		typeFile.setEditable(false);
 		typeFile.addItem("yeast.aa");
-		querySequence = new JPanel(new GridLayout(1, 0));
+		numberIndex = new JComboBox<String>();
+		numberIndex.setEditable(false);
+		numberIndex.addItem("yeast.aa.indexs");
 		comboOfOptions = new JComboBox<String>();
 		comboOfOptions.setEditable(true);
-		querySequence.add(labelQuerySelection);
+		JLabel lPercentage = new JLabel("Indicates the percentage: ");
+		textField = new JTextField();
+		textField.setEditable(true);
+		querySequence.add(lType);
 		querySequence.add(typeFile);
+		querySequence.add(lIndex);
+		querySequence.add(numberIndex);
+		querySequence.add(labelQuerySelection);
 		querySequence.add(comboOfOptions);
+		querySequence.add(lPercentage);
+		querySequence.add(textField);
 		add(querySequence);
 
-		// Panel queryPercentage
-
-		textField = new JTextField("Query percentage: ", 12);
-		textArea = new JTextArea(1, 3);
-		textArea.setEditable(true);
-		JScrollPane scrollPane = new JScrollPane(textArea);
-		add(textField);
-		add(scrollPane);
-
-		JPanel panel1 = new JPanel();
-		panel1.add(textField);
-
-		JPanel panel2 = new JPanel();
-		panel2.add(scrollPane);
-
-		JSplitPane queryPercentage = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panel1, panel2);
-
-		// Panel queryButton // A ESTE PANEL LE FALTA ALGO
-
+			// create button to make the query
+		
 		JPanel panelButtonQuery = new JPanel();
-		queryButton = new JButton("Press the button to make the query");
-		queryButton.setLayout(new GridLayout(2, 1));
+		queryButton = new JButton("Press to make the query");
+		queryButton.setLayout(new GridLayout(1, 1));
 		panelButtonQuery.add(queryButton);
 		this.add(panelButtonQuery);
 
+		JSplitPane makeQuery = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, querySequence, panelButtonQuery);
+
 		// Panel queryResult
 
-		JTextArea queryResult = new JTextArea(10, 20);
+		queryResult = new JTextArea(20, 60);
 		queryResult.setEditable(false);
 		JScrollPane scroll = new JScrollPane(queryResult);
 		add(scroll);
-
-		// Unimos los paneles
+		
+		// All panels
 
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Type", queryType);
-		tabbedPane.addTab("Sequence", querySequence);
-		tabbedPane.addTab("Percentage", queryPercentage);
-		tabbedPane.addTab("To make a query", panelButtonQuery);
-		tabbedPane.addTab("Result", queryResult);
+		tabbedPane.addTab("Sequence", makeQuery);
+		tabbedPane.addTab("Result", scroll);
 		add(tabbedPane);
 
 	}
@@ -125,7 +124,7 @@ public class VistaDePaneles extends JPanel {
 	}
 
 	public JTextArea getResponseArea() {
-		return textArea;
+		return queryResult;
 	}
 
 	public ArrayList<String> getSearchList() {
