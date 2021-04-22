@@ -1,7 +1,7 @@
 package principal;
 
 import java.awt.GridLayout;
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -85,6 +85,7 @@ public class VistaDePaneles extends JPanel {
 		JPanel panelButtonQuery = new JPanel();
 		queryButton = new JButton("Press to make the query");
 		queryButton.setLayout(new GridLayout(1, 1));
+		queryButton.setBackground(Color.LIGHT_GRAY);
 		panelButtonQuery.add(queryButton);
 		this.add(panelButtonQuery);
 

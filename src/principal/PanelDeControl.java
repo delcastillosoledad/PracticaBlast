@@ -20,12 +20,12 @@ public class PanelDeControl implements ActionListener {
 		if (e.getSource().equals(vista.getQueryButton())) {
 
 			if (vista.getComboOptions().getSelectedItem() == null || vista.getFieldPercentage().getText().isEmpty()) {
-				vista.getResponseArea().setText("Error: Los campos no son los correctos");
+				vista.getResponseArea().setText("Error: Los campos introducidos no son correctos");
 				correctRequest = false;
 			} else {
 				percentage = Float.parseFloat(vista.getFieldPercentage().getText());
 				if (percentage < 0 || percentage > 1) {
-					vista.getResponseArea().setText("Error: El porcentaje no es valido");
+					vista.getResponseArea().setText("Error: El porcentaje dado no es valido");
 					correctRequest = false;
 				}
 
