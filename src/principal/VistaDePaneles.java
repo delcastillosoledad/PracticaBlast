@@ -1,7 +1,6 @@
 package principal;
 
 import java.awt.GridLayout;
-import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -17,14 +16,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class VistaDePaneles extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	protected JTextField textField;
 	protected JTextArea queryResult,tResult;
-	protected JPanel querySequence, queryPercentage;
+	protected JPanel queryType, querySequence, queryPercentage,panelButtonQuery;
+	protected JLabel lType, lIndex, labelQuerySelection,lPercentage;
 	protected JButton queryButton;
+	protected ButtonGroup group;
 	protected JComboBox<String> comboOfOptions, typeFile, numberIndex;
 	protected JRadioButton proteinButton;
 	protected JRadioButton nucleotidButton;
@@ -44,10 +43,10 @@ public class VistaDePaneles extends JPanel {
 
 			// Group the radio buttons
 
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 		group.add(proteinButton);
 		group.add(nucleotidButton);
-		JPanel queryType = new JPanel(new GridLayout(1, 0));
+		queryType = new JPanel(new GridLayout(1, 0));
 		queryType.add(proteinButton);
 		queryType.add(nucleotidButton);
 		add(queryType);
@@ -56,9 +55,9 @@ public class VistaDePaneles extends JPanel {
 		
 		querySequence = new JPanel();
 		querySequence.setLayout(new GridLayout(5, 2));
-		JLabel lType = new JLabel("Choose the database: ");
-		JLabel lIndex = new JLabel("Index : ");
-		JLabel labelQuerySelection = new JLabel("Enter the sequence to compare: ");
+		lType = new JLabel("Choose the database: ");
+		lIndex = new JLabel("Index : ");
+		labelQuerySelection = new JLabel("Enter the sequence to compare: ");
 		typeFile = new JComboBox<String>();
 		typeFile.setEditable(false);
 		typeFile.addItem("yeast.aa");
@@ -67,7 +66,7 @@ public class VistaDePaneles extends JPanel {
 		numberIndex.addItem("yeast.aa.indexs");
 		comboOfOptions = new JComboBox<String>();
 		comboOfOptions.setEditable(true);
-		JLabel lPercentage = new JLabel("Indicates the percentage: ");
+		lPercentage = new JLabel("Indicates the percentage: ");
 		textField = new JTextField();
 		textField.setEditable(true);
 		querySequence.add(lType);
@@ -82,10 +81,9 @@ public class VistaDePaneles extends JPanel {
 
 			// create button to make the query
 		
-		JPanel panelButtonQuery = new JPanel();
+		panelButtonQuery = new JPanel();
 		queryButton = new JButton("Press to make the query");
 		queryButton.setLayout(new GridLayout(1, 1));
-		queryButton.setBackground(Color.LIGHT_GRAY);
 		panelButtonQuery.add(queryButton);
 		this.add(panelButtonQuery);
 

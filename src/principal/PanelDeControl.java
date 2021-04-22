@@ -50,9 +50,6 @@ public class PanelDeControl implements ActionListener {
 			queryType = 'n';
 		}
 
-		// Se añade la última busca al comboBox. Para ello, miramos que no esté ya en la
-		// lista de secuencias buscadas.
-		// Si no se ha buscado, lo añadimos a la lista.
 		String lastSearch = vista.getComboOptions().getSelectedItem().toString();
 		if (vista.getSearchList().indexOf(lastSearch) == -1) {
 			vista.getComboOptions().addItem(lastSearch);
